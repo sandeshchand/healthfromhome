@@ -128,3 +128,20 @@
     @apply font-sans;
   }
 }
+
+@layer utilities {
+  .decorative-grid {
+    background-image:
+      linear-gradient(to right, rgb(15 118 110 / 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(15 118 110 / 0.08) 1px, transparent 1px);
+    background-size: 34px 34px;
+  }
+
+  .soft-panel {
+    @apply border border-emerald-100 bg-white/85 shadow-sm shadow-emerald-900/10 backdrop-blur;
+  }
+
+  .color-card {
+    @apply border border-emerald-100 bg-gradient-to-br from-white to-emerald-50/60 shadow-sm shadow-emerald-900/10;
+  }
+}

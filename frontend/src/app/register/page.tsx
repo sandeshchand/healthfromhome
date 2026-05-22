@@ -45,6 +45,7 @@ export default function RegisterPage() {
         eyebrow="Start care coordination"
         title="Create your family account"
         description="Register first, then add a parent profile and request services from the public service menu."
+        aside={<FormAside title="After registration" items={["Add parent profile", "Choose a service", "Submit booking request", "Track admin updates"]} />}
       >
         <form onSubmit={handleSubmit(onSubmit)} className="mt-5 space-y-5">
           <div className="grid gap-4 sm:grid-cols-2">
@@ -80,5 +81,18 @@ export default function RegisterPage() {
         </form>
       </FormCard>
     </PageShell>
+  )
+}
+
+function FormAside({ title, items }: { title: string; items: string[] }) {
+  return (
+    <div>
+      <h2 className="font-semibold text-zinc-950">{title}</h2>
+      <ul className="mt-4 space-y-3 text-sm text-zinc-700">
+        {items.map((item) => (
+          <li key={item} className="rounded-lg bg-white/70 p-3">{item}</li>
+        ))}
+      </ul>
+    </div>
   )
 }

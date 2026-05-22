@@ -3,10 +3,11 @@ from .models import Payment
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ('booking', 'amount', 'status', 'created_at')
-    list_editable = ('status',)
-    list_filter = ('status', 'created_at')
-    search_fields = ('booking__id', 'transaction_id')
+    list_display = ('booking', 'amount', 'currency', 'payment_method', 'gateway', 'status', 'paid_at', 'created_at')
+    list_editable = ('payment_method', 'gateway', 'status',)
+    list_filter = ('payment_method', 'gateway', 'status', 'created_at', 'paid_at')
+    search_fields = ('booking__id', 'transaction_id', 'gateway_payment_id', 'gateway_reference')
+    readonly_fields = ('created_at', 'updated_at', 'paid_at')
     actions = ['mark_pending', 'mark_completed', 'mark_failed', 'mark_refunded']
 
     @admin.action(description='Mark selected payments as pending')

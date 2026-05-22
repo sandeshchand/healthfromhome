@@ -14,3 +14,18 @@ class UserSerializer(serializers.ModelSerializer):
         validated_data['is_patient_family'] = True
         user = User.objects.create_user(**validated_data)
         return user
+
+
+class CurrentUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'id',
+            'username',
+            'email',
+            'first_name',
+            'last_name',
+            'is_patient_family',
+            'is_provider',
+            'date_joined',
+        )

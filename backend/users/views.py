@@ -1,7 +1,7 @@
 from rest_framework import generics
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.contrib.auth import get_user_model
-from .serializers import UserSerializer
+from .serializers import UserSerializer, CurrentUserSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
@@ -12,6 +12,13 @@ class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = UserSerializer
+
+class CurrentUserView(generics.RetrieveAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = CurrentUserSerializer
+
+    def get_object(self):
+        return self.request.user
 
 class CustomAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):

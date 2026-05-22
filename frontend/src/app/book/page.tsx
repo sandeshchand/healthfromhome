@@ -95,6 +95,8 @@ function BookForm() {
         eyebrow="Booking request"
         title="Request a care service"
         description="Submit the patient, service, and preferred schedule. Admin will review provider availability and final pricing before confirmation."
+        maxWidth="max-w-6xl"
+        aside={<FormAside title="Before you submit" items={["Starting price is not final", "Admin reviews availability", "Provider is assigned later", "Status appears in bookings"]} />}
       >
         <form onSubmit={handleSubmit(onSubmit)} className="mt-5 space-y-6">
           {loading ? (
@@ -112,7 +114,7 @@ function BookForm() {
                 </p>
               )}
 
-              <section className="space-y-4">
+              <section className="space-y-4 rounded-lg bg-emerald-50/50 p-4">
                 <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">Who and what</h2>
                 <FormField label="Patient" error={errors.patient?.message} helper="Choose the parent or patient receiving this service." required>
                   <select className={inputStyles()} {...register("patient")}>
@@ -147,7 +149,7 @@ function BookForm() {
                 )}
               </section>
 
-              <section className="space-y-4 border-t border-zinc-200 pt-5">
+              <section className="space-y-4 rounded-lg bg-sky-50/60 p-4">
                 <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">Preferred schedule</h2>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <FormField label="Requested date" error={errors.requested_date?.message} required>
@@ -159,7 +161,7 @@ function BookForm() {
                 </div>
               </section>
 
-              <section className="space-y-4 border-t border-zinc-200 pt-5">
+              <section className="space-y-4 rounded-lg bg-emerald-50/50 p-4">
                 <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">Extra instructions</h2>
                 <FormField label="Special instructions" error={errors.special_instructions?.message} helper="Add access notes, mobility needs, language preference, or appointment context.">
                   <textarea className={inputStyles("min-h-24 resize-y")} {...register("special_instructions")} />
@@ -181,6 +183,19 @@ function BookForm() {
         </form>
       </FormCard>
     </PageShell>
+  )
+}
+
+function FormAside({ title, items }: { title: string; items: string[] }) {
+  return (
+    <div>
+      <h2 className="font-semibold text-zinc-950">{title}</h2>
+      <ul className="mt-4 space-y-3 text-sm text-zinc-700">
+        {items.map((item) => (
+          <li key={item} className="rounded-lg bg-white/70 p-3">{item}</li>
+        ))}
+      </ul>
+    </div>
   )
 }
 

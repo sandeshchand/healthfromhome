@@ -57,9 +57,9 @@ export default function ServicesPage() {
   return (
     <PageShell>
       <main>
-        <section className="bg-white">
+        <section className="bg-[linear-gradient(135deg,#ecfdf5_0%,#e0f2fe_100%)]">
           <div className="mx-auto max-w-6xl px-4 py-12">
-            <p className="inline-flex rounded-full bg-emerald-50 px-3 py-1 text-sm font-semibold text-emerald-800">
+            <p className="inline-flex rounded-full border border-emerald-200 bg-white/80 px-3 py-1 text-sm font-semibold text-emerald-800 shadow-sm">
               Public service menu
             </p>
             <div className="mt-5 flex flex-wrap items-end justify-between gap-6">
@@ -70,14 +70,14 @@ export default function ServicesPage() {
                   assignment are confirmed by admin after the request is submitted.
                 </p>
               </div>
-              <div className="rounded-lg border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-700">
+              <div className="rounded-lg border border-emerald-100 bg-white/80 px-4 py-3 text-sm text-zinc-700 shadow-sm">
                 <span className="font-semibold text-zinc-950">{serviceCount}</span> active service types
               </div>
             </div>
           </div>
         </section>
 
-        <section className="border-y border-zinc-200 bg-zinc-50">
+        <section className="border-y border-emerald-100 bg-[linear-gradient(180deg,#f8fafc_0%,#ecfdf5_100%)]">
           <div className="mx-auto max-w-6xl px-4 py-10">
             {loading ? (
               <p className="text-zinc-600">Loading services...</p>
@@ -87,7 +87,7 @@ export default function ServicesPage() {
               </div>
             ) : (
               <>
-                <div className="rounded-lg border border-zinc-200 bg-white p-4 shadow-sm">
+                <div className="rounded-lg border border-emerald-100 bg-white/90 p-4 shadow-sm shadow-emerald-900/10 backdrop-blur">
                   <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr_auto]">
                     <label className="space-y-2">
                       <span className="text-sm font-medium text-zinc-900">Search</span>
@@ -143,7 +143,7 @@ export default function ServicesPage() {
 
 function ServiceCard({ item }: { item: ServicePricing }) {
   return (
-    <article className="flex flex-col rounded-lg border border-zinc-200 bg-white p-5 shadow-sm">
+    <article className="flex flex-col rounded-lg border border-emerald-100 bg-gradient-to-br from-white to-emerald-50/50 p-5 shadow-sm shadow-emerald-900/10">
       <div className="flex items-start justify-between gap-4">
         <div>
           <h2 className="text-xl font-semibold">{item.service.name}</h2>
@@ -212,7 +212,7 @@ function FilterSelect({
 
 function Detail({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-3">
+        <div className="rounded-lg border border-emerald-100 bg-white/80 p-3">
       <p className="text-xs font-medium uppercase tracking-wide text-zinc-500">{label}</p>
       <p className="mt-1 font-medium text-zinc-950">{value}</p>
     </div>

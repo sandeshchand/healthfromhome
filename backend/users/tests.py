@@ -34,3 +34,19 @@ class UserApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn('token', response.data)
+
+    def test_me_returns_current_user(self):
+        user = User.objects.create_user(
+            username='family@example.com',
+            email='family@example.com',
+            password='StrongPass123!',
+            first_name='Family',
+            is_patient_family=True,
+        )
+        self.client.force_authenticate(user)
+
+        response = self.client.get('/api/users/me/')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['username'], 'family@example.com')
+        self.assertEqual(response.data['first_name'], 'Family')

@@ -45,7 +45,8 @@ export default function LoginPage() {
         eyebrow="Family account"
         title="Login to your care dashboard"
         description="Use the account you created to track bookings, reports, payments, and patient profiles."
-        maxWidth="max-w-md"
+        maxWidth="max-w-4xl"
+        aside={<FormAside title="What you can manage" items={["Booking status", "Medical reports", "Payment updates", "Reminders"]} />}
       >
         <form onSubmit={handleSubmit(onSubmit)} className="mt-5 space-y-5">
           <FormField label="Username" error={errors.username?.message} required>
@@ -68,5 +69,18 @@ export default function LoginPage() {
         </form>
       </FormCard>
     </PageShell>
+  )
+}
+
+function FormAside({ title, items }: { title: string; items: string[] }) {
+  return (
+    <div>
+      <h2 className="font-semibold text-zinc-950">{title}</h2>
+      <ul className="mt-4 space-y-3 text-sm text-zinc-700">
+        {items.map((item) => (
+          <li key={item} className="rounded-lg bg-white/70 p-3">{item}</li>
+        ))}
+      </ul>
+    </div>
   )
 }
