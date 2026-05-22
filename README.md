@@ -295,6 +295,7 @@ See production notes and deployment guide:
 docs/production_readiness.md
 docs/deployment_guide.md
 docs/payment_gateway_plan.md
+docs/medical_data_handling.md
 ```
 
 ## Suggested Next Milestones

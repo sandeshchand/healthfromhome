@@ -10,6 +10,7 @@ This MVP is ready for local demos and pilot preparation, not production deployme
 - Restrict CORS to the production frontend domain.
 - Use strong admin passwords and remove demo accounts.
 - Do not use local `media/` storage for long-term production medical records.
+- Add validation and audit logs for medical record upload/view/download events.
 - Add database backup and restore process.
 - Review permissions for medical record access.
 - Add HTTPS/TLS through the hosting layer.
@@ -41,4 +42,7 @@ This MVP is ready for local demos and pilot preparation, not production deployme
 
 ## Related Guide
 
-See `docs/deployment_guide.md` for the pilot deployment checklist and verification commands.
+See:
+
+- `docs/deployment_guide.md` for the pilot deployment checklist and verification commands.
+- `docs/medical_data_handling.md` for medical report storage, access, audit, and retention guidance.

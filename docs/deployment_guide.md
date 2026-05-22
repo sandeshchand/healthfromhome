@@ -11,6 +11,7 @@ This guide is for moving the MVP from local demo to a controlled pilot. It is no
 - Restrict CORS to the real frontend domain.
 - Configure HTTPS at the hosting layer.
 - Move uploaded medical files out of local disk storage.
+- Add medical file validation, private storage, signed URLs, and access audit logging.
 - Confirm backup and restore steps for PostgreSQL.
 - Review admin access for bookings, payments, and medical records.
 - Replace placeholder contact details in `/contact`.
@@ -71,6 +72,7 @@ cmd /c npm run build
 6. Deploy backend and frontend.
 7. Confirm register, login, patient create, booking request, admin assignment, payment tracking, record upload, and reminder display.
 8. Run one complete manual QA pass using `docs/manual_qa_checklist.md`.
+9. Review `docs/medical_data_handling.md` before using real medical documents.
 
 ## Known Gaps Before Full Production
 
@@ -79,6 +81,7 @@ cmd /c npm run build
 - No provider self-service portal.
 - No production object storage implementation.
 - No formal audit log for admin medical record access.
+- Medical record URLs are still local-development style and should become permission-checked signed URLs for production.
 - No automated uptime monitoring or error tracking.
 
 ## Payment Gateway Notes
