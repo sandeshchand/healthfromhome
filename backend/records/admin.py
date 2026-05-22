@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import MedicalRecord
 
-# Register your models here.
+@admin.register(MedicalRecord)
+class MedicalRecordAdmin(admin.ModelAdmin):
+    list_display = ('title', 'patient', 'booking', 'uploaded_at')
+    list_filter = ('uploaded_at',)
+    search_fields = ('title', 'patient__first_name', 'patient__last_name')
