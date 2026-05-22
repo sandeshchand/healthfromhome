@@ -17,7 +17,7 @@ class MedicalRecordSerializer(serializers.ModelSerializer):
     def get_file_url(self, obj):
         request = self.context.get('request')
         if obj.file and request:
-            return request.build_absolute_uri(obj.file.url)
+            return request.build_absolute_uri(f'/api/records/{obj.id}/download/')
         if obj.file:
-            return obj.file.url
+            return f'/api/records/{obj.id}/download/'
         return None

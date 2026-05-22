@@ -287,6 +287,7 @@ npm run build
 - Local mock payment is for testing only and does not charge real cards or connect to real Khalti/eSewa wallets.
 - No SMS/WhatsApp/email automation yet.
 - Medical uploads are local in development.
+- Medical record downloads are permission-checked and audited for family users.
 - Do not use real patient data during development.
 
 See production notes and deployment guide:

@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react"
 import { FileText, FolderOpen, Search, ShieldCheck } from "lucide-react"
 import { api } from "@/lib/api"
 import { hasToken } from "@/lib/auth"
+import { openAuthenticatedFile } from "@/lib/download"
 import type { MedicalRecord } from "@/lib/types"
 import { PageShell } from "@/components/page-shell"
 import { inputStyles } from "@/components/form-field"
@@ -202,13 +203,13 @@ function RecordCard({ record }: { record: MedicalRecord }) {
 
       <div className="mt-5 flex flex-wrap gap-3">
         {record.file_url && (
-          <Link
-            href={record.file_url}
-            target="_blank"
+          <button
+            type="button"
+            onClick={() => openAuthenticatedFile(record.file_url!, record.title)}
             className="inline-flex rounded-lg bg-emerald-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-800"
           >
             View report
-          </Link>
+          </button>
         )}
         {record.booking && (
           <Link

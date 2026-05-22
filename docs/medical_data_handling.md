@@ -15,6 +15,11 @@ MedicalRecord
 - title
 - description
 - file
+- original_filename
+- file_size
+- content_type
+- storage_backend
+- uploaded_by
 - uploaded_at
 ```
 
@@ -28,6 +33,8 @@ Current customer access:
 
 - Family users can view only records connected to their own patient profiles.
 - The records API filters by `patient__family_member=request.user`.
+- File downloads use `/api/records/{id}/download/`, which checks family ownership before returning the file.
+- View/download events are logged in `MedicalRecordAccessLog`.
 - Records can be listed on `/records`.
 - Records linked to a booking appear on `/bookings/{id}`.
 
@@ -67,16 +74,19 @@ Backend returns short-lived signed download/view URL
 
 ## Upload Validation Requirements
 
-Before pilot or production, add validation for:
+Implemented MVP validation:
 
 - Allowed file types: PDF, JPG, JPEG, PNG
-- Maximum file size: recommended 10 MB for MVP pilot
-- Safe filename generation
-- Content type detection
-- Empty file rejection
+- Maximum file size: 10 MB
+- Safe generated storage filename
+- Content type metadata
+
+Still recommended before full production:
+
+- Empty file rejection hardening
 - Optional malware scan before long-term storage
 
-Recommended model fields to add:
+Implemented model fields:
 
 ```text
 file_size
@@ -108,13 +118,16 @@ Provider users:
 
 ## Audit Log Plan
 
-Production should track access to sensitive records.
+Production should track access to sensitive records. The MVP now logs family view/download access.
 
 Recommended audit events:
 
+- `VIEWED`
+- `DOWNLOADED`
+
+Future audit events:
+
 - `RECORD_UPLOADED`
-- `RECORD_VIEWED`
-- `RECORD_DOWNLOADED`
 - `RECORD_DELETED`
 - `RECORD_LINKED_TO_BOOKING`
 
@@ -171,15 +184,15 @@ Backups should be:
 
 Next coding steps:
 
-1. Add file metadata fields to `MedicalRecord`.
-2. Add upload validation for file type and size.
-3. Add safe filename generation.
-4. Add `MedicalRecordAccessLog` model.
-5. Add audit logging when family users list or download records.
-6. Replace direct media URLs with permission-checked download endpoint.
-7. Add private object storage integration.
-8. Add signed URL generation for production.
-9. Add tests for file validation and access audit.
+1. Done - Add file metadata fields to `MedicalRecord`.
+2. Done - Add upload validation for file type and size.
+3. Done - Add safe filename generation.
+4. Done - Add `MedicalRecordAccessLog` model.
+5. Done - Add audit logging when family users view or download records.
+6. Done - Replace direct media URLs with permission-checked download endpoint.
+7. Next - Add private object storage integration.
+8. Next - Add signed URL generation for production.
+9. Done - Add tests for file validation and access audit.
 
 ## Current Risk Level
 

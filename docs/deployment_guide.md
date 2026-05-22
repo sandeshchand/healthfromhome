@@ -11,7 +11,8 @@ This guide is for moving the MVP from local demo to a controlled pilot. It is no
 - Restrict CORS to the real frontend domain.
 - Configure HTTPS at the hosting layer.
 - Move uploaded medical files out of local disk storage.
-- Add medical file validation, private storage, signed URLs, and access audit logging.
+- Confirm medical file validation and access audit logging are enabled.
+- Add private object storage and signed URLs before real production use.
 - Confirm backup and restore steps for PostgreSQL.
 - Review admin access for bookings, payments, and medical records.
 - Replace placeholder contact details in `/contact`.
@@ -80,8 +81,9 @@ cmd /c npm run build
 - No real payment gateway integration. The current Pay now flow supports local mock Visa/Mastercard, Khalti, and eSewa payments only.
 - No provider self-service portal.
 - No production object storage implementation.
-- No formal audit log for admin medical record access.
-- Medical record URLs are still local-development style and should become permission-checked signed URLs for production.
+- Family medical record view/download audit logging exists.
+- No formal audit log for admin medical record access yet.
+- Medical record downloads are permission-checked locally but should use private object storage and signed URLs for production.
 - No automated uptime monitoring or error tracking.
 
 ## Payment Gateway Notes

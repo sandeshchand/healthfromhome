@@ -6,6 +6,7 @@ import { FormEvent, useEffect, useMemo, useState } from "react"
 import { CheckCircle2, CreditCard, FileText, Info, ShieldCheck, Smartphone, UserRoundCheck, WalletCards } from "lucide-react"
 import { api } from "@/lib/api"
 import { hasToken } from "@/lib/auth"
+import { openAuthenticatedFile } from "@/lib/download"
 import { formatNpr } from "@/lib/format"
 import { statusGuidance } from "@/lib/status"
 import type { Booking, MedicalRecord, Payment } from "@/lib/types"
@@ -161,13 +162,13 @@ export default function BookingDetailPage() {
                           </p>
                           {record.description && <p className="mt-2 text-sm text-zinc-600">{record.description}</p>}
                           {record.file_url && (
-                            <Link
-                              href={record.file_url}
-                              target="_blank"
+                            <button
+                              type="button"
+                              onClick={() => openAuthenticatedFile(record.file_url!, record.title)}
                               className="mt-4 inline-flex rounded-lg bg-emerald-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-800"
                             >
                               View report
-                            </Link>
+                            </button>
                           )}
                         </div>
                       </div>

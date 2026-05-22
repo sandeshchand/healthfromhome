@@ -19,8 +19,8 @@ class PaymentInline(admin.StackedInline):
 class MedicalRecordInline(admin.TabularInline):
     model = MedicalRecord
     extra = 1
-    fields = ('patient', 'title', 'description', 'file', 'uploaded_at')
-    readonly_fields = ('uploaded_at',)
+    fields = ('patient', 'title', 'description', 'file', 'original_filename', 'file_size', 'content_type', 'uploaded_by', 'uploaded_at')
+    readonly_fields = ('original_filename', 'file_size', 'content_type', 'uploaded_by', 'uploaded_at')
 
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
@@ -84,6 +84,16 @@ class BookingAdmin(admin.ModelAdmin):
                 'assignment__provider__user',
             )
         )
+
+    def save_formset(self, request, form, formset, change):
+        instances = formset.save(commit=False)
+        for deleted_object in formset.deleted_objects:
+            deleted_object.delete()
+        for instance in instances:
+            if isinstance(instance, MedicalRecord) and not instance.uploaded_by:
+                instance.uploaded_by = request.user
+            instance.save()
+        formset.save_m2m()
 
     @admin.display(description='Payment')
     def payment_status(self, obj):
